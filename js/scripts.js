@@ -120,10 +120,11 @@ function setGamePoints() {
 }
 
 function gameOver(gameWinner) {
-	console.log();
 	gameState = "ended";
 	setGameElements();
+	
 	player.score = computer.score = 0;
 	setGamePoints();
+	
 	winnerElem.innerText = "The winner is " + gameWinner;
 }
