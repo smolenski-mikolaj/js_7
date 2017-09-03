@@ -59,9 +59,6 @@ function newGame() {
   }
 }
 
-var x = Math.random();
-Math.floor(Math.random()*3);
-
 function getComputerPick() {
     var possiblePicks = ['rock', 'paper', 'scissors'];
     return possiblePicks[Math.floor(Math.random()*3)];
@@ -86,8 +83,9 @@ function checkRoundWinner(playerPick, computerPick) {
 
   var winnerIs = 'player';
 
-    if (playerPick == computerPick) {
-        winnerIs = 'noone'; // remis
+    if (playerPick == computerPick && typeof playerPick == "string" ) {
+        winnerIs = 'none'; // remis
+		console.log(typeof playerPick);
     } else if (
         (computerPick == 'rock' &&  playerPick == 'scissors') ||
         (computerPick == 'scissors' &&  playerPick == 'paper') ||
@@ -96,22 +94,17 @@ function checkRoundWinner(playerPick, computerPick) {
         winnerIs = 'computer';
     }
 
-    if (winnerIs == 'player') {
+    if (winnerIs == 'player' && typeof winnerIs == "string" ) {
         playerResultElem.innerHTML = "Win!";
         player.score++;
-    } else if (winnerIs == 'computer') {
+    } else if (winnerIs == 'computer' && typeof winnerIs == "string") {
         computerResultElem.innerHTML = "Win!";
         computer.score++;
     }
 	
 	setGamePoints();
+	gameOver();
 	
-	if (player.score == 10) {
-		var gameWinner = player.name;
-		gameOver(gameWinner);
-	} else if (computer.score == 10) {
-		gameOver('computer');
-	}	
 }
 
 function setGamePoints() {
@@ -119,12 +112,20 @@ function setGamePoints() {
     computerPointsElem.innerHTML = computer.score;
 }
 
-function gameOver(gameWinner) {
-	gameState = "ended";
-	setGameElements();
-	
-	player.score = computer.score = 0;
-	setGamePoints();
-	
-	winnerElem.innerText = "The winner is " + gameWinner;
+function gameOver() {
+	if (player.score == 10) {
+		var gameWinner = player.name;
+		gameState = "ended";
+		setGameElements();	
+		player.score = computer.score = 0;
+		setGamePoints();	
+		winnerElem.innerText = "The winner is " + gameWinner;
+	} else if (computer.score == 10) {
+		var gameWinner = "computer";
+		gameState = "ended";
+		setGameElements();	
+		player.score = computer.score = 0;
+		setGamePoints();	
+		winnerElem.innerText = "The winner is " + gameWinner;
+	}	
 }
