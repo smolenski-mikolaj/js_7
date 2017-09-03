@@ -83,9 +83,8 @@ function checkRoundWinner(playerPick, computerPick) {
 
   var winnerIs = 'player';
 
-    if (playerPick == computerPick && typeof playerPick == "string" ) {
+    if (playerPick == computerPick && typeof playerPick === "string" ) {
         winnerIs = 'none'; // remis
-		console.log(typeof playerPick);
     } else if (
         (computerPick == 'rock' &&  playerPick == 'scissors') ||
         (computerPick == 'scissors' &&  playerPick == 'paper') ||
@@ -94,10 +93,10 @@ function checkRoundWinner(playerPick, computerPick) {
         winnerIs = 'computer';
     }
 
-    if (winnerIs == 'player' && typeof winnerIs == "string" ) {
+    if (winnerIs == 'player' && typeof winnerIs === "string" ) {
         playerResultElem.innerHTML = "Win!";
         player.score++;
-    } else if (winnerIs == 'computer' && typeof winnerIs == "string") {
+    } else if (winnerIs == 'computer' && typeof winnerIs === "string") {
         computerResultElem.innerHTML = "Win!";
         computer.score++;
     }
@@ -113,14 +112,14 @@ function setGamePoints() {
 }
 
 function gameOver() {
-	if (player.score == 10) {
+	if (player.score == 10 && typeof player.score === "number") {
 		var gameWinner = player.name;
 		gameState = "ended";
 		setGameElements();	
 		player.score = computer.score = 0;
 		setGamePoints();	
 		winnerElem.innerText = "The winner is " + gameWinner;
-	} else if (computer.score == 10) {
+	} else if (computer.score == 10 && typeof computer.score === "number") {
 		var gameWinner = "computer";
 		gameState = "ended";
 		setGameElements();	
